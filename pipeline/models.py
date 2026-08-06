@@ -1,4 +1,4 @@
-"""Pydantic v2 schemas for the fields used by this assignment."""
+"""과제에서 사용하는 필드를 검증하기 위한 Pydantic v2 스키마."""
 
 from datetime import datetime
 
@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 
 class WeatherHourly(BaseModel):
-    """One hourly Seoul weather observation/forecast."""
+    """서울의 한 시간 단위 날씨 관측값 또는 예보값."""
 
     time: datetime
     temperature_2m: float = Field(ge=-90, le=60)
@@ -14,7 +14,7 @@ class WeatherHourly(BaseModel):
 
 
 class WeatherResponse(BaseModel):
-    """Validate the parallel arrays returned by Open-Meteo."""
+    """Open-Meteo가 반환하는 병렬 배열의 구조와 값을 검증한다."""
 
     model_config = ConfigDict(extra="ignore")
 
@@ -55,7 +55,7 @@ class WeatherResponse(BaseModel):
 
 
 class Country(BaseModel):
-    """Selected Korea fields from Countries.dev."""
+    """Countries.dev 응답에서 선택한 대한민국 국가 정보."""
 
     model_config = ConfigDict(extra="ignore")
 
@@ -68,7 +68,7 @@ class Country(BaseModel):
 
 
 class IpLocation(BaseModel):
-    """Selected geolocation fields returned by ip-api."""
+    """ip-api 응답에서 선택한 IP 기반 위치 정보."""
 
     model_config = ConfigDict(extra="ignore")
 

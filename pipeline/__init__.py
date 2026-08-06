@@ -1,1 +1,1 @@
-"""Day 1 asynchronous data collection pipeline."""
+"""Day 1 비동기 데이터 수집 파이프라인 패키지."""

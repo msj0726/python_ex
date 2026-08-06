@@ -1,4 +1,4 @@
-"""Fetch three independent APIs concurrently and validate their JSON."""
+"""서로 독립적인 API 세 개를 동시에 호출하고 JSON 응답을 검증한다."""
 
 import asyncio
 from typing import Any
@@ -14,14 +14,14 @@ IP_URL = "http://ip-api.com/json/8.8.8.8"
 
 
 async def fetch_json(client: httpx.AsyncClient, url: str, **params: Any) -> Any:
-    """GET one endpoint and raise on HTTP or malformed JSON errors."""
+    """한 API를 GET 방식으로 호출하고 HTTP 또는 JSON 오류를 예외로 처리한다."""
     response = await client.get(url, params=params or None)
     response.raise_for_status()
     return response.json()
 
 
 async def collect_all() -> tuple[WeatherResponse, Country, IpLocation]:
-    """Collect all endpoints at the same time using asyncio.gather."""
+    """asyncio.gather를 사용하여 모든 API의 데이터를 동시에 수집한다."""
     timeout = httpx.Timeout(20.0)
     async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
         weather_json, country_json, ip_json = await asyncio.gather(
@@ -38,7 +38,7 @@ async def collect_all() -> tuple[WeatherResponse, Country, IpLocation]:
             fetch_json(client, IP_URL),
         )
 
-    # model_validate is the Pydantic v2 validation entry point.
+    # model_validate는 Pydantic v2에서 데이터 검증을 시작하는 메서드이다.
     try:
         return (
             WeatherResponse.model_validate(weather_json),

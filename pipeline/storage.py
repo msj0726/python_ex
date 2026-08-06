@@ -1,4 +1,4 @@
-"""Normalize validated models and compare CSV/Parquet I/O time."""
+"""검증된 모델을 표 형태로 변환하고 CSV와 Parquet의 입출력 시간을 비교한다."""
 
 from pathlib import Path
 from time import perf_counter
@@ -11,7 +11,7 @@ from pipeline.models import Country, IpLocation, WeatherResponse
 def build_frames(
     weather: WeatherResponse, country: Country, ip_location: IpLocation
 ) -> dict[str, pd.DataFrame]:
-    """Convert models to three rectangular tables suitable for both formats."""
+    """검증 모델을 두 저장 형식에 적합한 세 개의 표로 변환한다."""
     return {
         "weather": pd.DataFrame([row.model_dump(mode="json") for row in weather.rows()]),
         "country": pd.DataFrame([country.model_dump()]),
@@ -22,7 +22,7 @@ def build_frames(
 def save_and_benchmark(
     frames: dict[str, pd.DataFrame], output_dir: Path
 ) -> dict[str, dict[str, float]]:
-    """Write/read all tables, returning elapsed seconds and total byte size."""
+    """모든 표를 저장하고 읽은 뒤 소요 시간과 전체 파일 크기를 반환한다."""
     output_dir.mkdir(parents=True, exist_ok=True)
     result: dict[str, dict[str, float]] = {}
 

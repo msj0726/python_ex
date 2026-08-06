@@ -1,4 +1,4 @@
-"""Command-line entry point for the Day 1 pipeline."""
+"""Day 1 데이터 수집 파이프라인의 명령줄 실행 진입점."""
 
 import asyncio
 from pathlib import Path

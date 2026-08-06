@@ -1,4 +1,4 @@
-"""Schema validation tests without depending on external APIs."""
+"""외부 API에 의존하지 않고 실행하는 스키마 검증 테스트."""
 
 import pytest
 from pydantic import ValidationError
